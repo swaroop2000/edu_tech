@@ -186,46 +186,35 @@ function App() {
 
 			  </>
 
-			  // <form onSubmit={handleUserSubmit} className="flex flex-col items-center bg-blue-600 p-6 rounded-lg shadow-lg">
-			  //   <img src={logo} alt="Logo" className="w-24 h-24 mb-4" />
-			  //   <label htmlFor="user_id" className="mb-2 text-white text-lg">Enter your user ID:</label>
-			  //   <input
-			  //     type="text"
-			  //     id="user_id"
-			  //     value={userInput}
-			  //     onChange={(e) => setUserInput(e.target.value)}
-			  //     className="border border-gray-300 rounded px-2 py-1 mb-4"
-			  //     required
-			  //   />
-			  //   <button type="submit" className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
-			  //     Submit
-			  //   </button>
-			  // </form>
+			 
 		  ) : (
 			  <>
-				  <div className="h-1/10 flex justify-center items-center">
+				  {/* <div className="h-1/10 flex justify-center items-center">
 					  <VideoForm userId={userId} />
-				  </div>
+				  </div> */}
 
-				  <div className="flex mt-4">
-					  <div className="w-1/4 p-4">
+				  <div className="flex mt-6">
+					  <div className="w-100 p-4">
 						  <VideoList userId={userId} onVideoSelect={handleVideoSelect} />
 					  </div>
 
-					  <div className="w-3/4 p-4">
+					  {/* <div className="w-3/4 p-4"> */}
 						  {selectedVideo ? (
 							  <>
 								  <VideoPlayer video={selectedVideo} />
 								  <CommentForm videoId={selectedVideo.id} userId={userId} />
 								  <CommentList videoId={selectedVideo.id} />
 							  </>
-						  ) : (
-							  <p className="text-center text-white">Select a video to view details and comments</p>
-						  )}
-					  </div>
+						  ) 
+						  : (
+							  <p className="text-center text-white"></p>
+						  )
+						  }
+					  {/* </div> */}
 				  </div>
 			  </>
-		  )}
+		  )
+		  }
 	  </div></>
   );
 }
