@@ -97,7 +97,7 @@ function App() {
 
 
 	
-	<><link href="https://fonts.googleapis.com/css?family=Mitr|Roboto+Slab|Source+Sans+Pro&display=swap" rel="stylesheet" /><script src="https://premium-tailwindcomponents.netlify.app/assets/build/js/main.js?id=8c11b7cf78ebea1b5aed"></script><div className="flex flex-col justify-center items-center h-screen bg-indigo-900">
+	<><link href="https://fonts.googleapis.com/css?family=Mitr|Roboto+Slab|Source+Sans+Pro&display=swap" rel="stylesheet" /><script src="https://premium-tailwindcomponents.netlify.app/assets/build/js/main.js?id=8c11b7cf78ebea1b5aed"></script><div className="flex flex-col justify-center items-center min-h-screen bg-indigo-900">
 		  {!userId ? (
 			  <>
 				  <div className="bg-indigo-900 items-center h-screen bg-indigo-900">
