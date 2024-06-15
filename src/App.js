@@ -192,6 +192,7 @@ function App() {
 				  {/* <div className="h-1/10 flex justify-center items-center">
 					  <VideoForm userId={userId} />
 				  </div> */}
+				  <img src={logo} alt="Logo" className="w-100 h-50 mb-4" />
 
 				  <div className="flex mt-6">
 					  <div className="w-100 p-4">
@@ -211,7 +212,9 @@ function App() {
 						  )
 						  }
 					  {/* </div> */}
+					  
 				  </div>
+				  <img src={logo_b} alt="Logo" className="w-100 h-35 m1-25" />
 			  </>
 		  )
 		  }
