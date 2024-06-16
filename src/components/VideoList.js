@@ -589,6 +589,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { fetchVideosByUserId } from '../utils/api';
 import VideoForm from './VideoForm';
+import VideoPlayer from './VideoPlayer';
 
 
 // Working
@@ -651,7 +652,7 @@ import VideoForm from './VideoForm';
 // };
 
 
-const VideoCard = ({ video }) => {
+const VideoCard = ({ video, onVideoSelect }) => {
   const videoRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -671,6 +672,7 @@ const VideoCard = ({ video }) => {
   };
 
   const handleClick = () => {
+    onVideoSelect(video);
     // Implement your click functionality if needed
   };
 
@@ -725,6 +727,7 @@ const VideoCard = ({ video }) => {
 const VideoList = ({ userId, onVideoSelect }) => {
   const [videos, setVideos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
 
   const fetchUserVideos = async () => {
@@ -757,6 +760,9 @@ const VideoList = ({ userId, onVideoSelect }) => {
       setSuccessMessage('');
     }, 3000);
     closeModal();
+  };
+  const handleVideoSelect = (video) => {
+    setSelectedVideo(video);
   };
 
   return (
@@ -795,13 +801,14 @@ const VideoList = ({ userId, onVideoSelect }) => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {videos.map((video) => (
-          <VideoCard key={video.id} video={video} onVideoSelect={onVideoSelect} />
+          <VideoCard key={video.id} video={video} onVideoSelect={handleVideoSelect} />
         ))}
       </div>
 
       {isModalOpen && (
         <VideoForm userId={userId} onCloseModal={closeModal} onVideoCreated={handleVideoCreated} />
       )}
+       {selectedVideo && <VideoPlayer video={selectedVideo} onClose={() => setSelectedVideo(null)} />}
     </div>
   );
 };
