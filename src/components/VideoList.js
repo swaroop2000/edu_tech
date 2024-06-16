@@ -586,33 +586,141 @@
 // export default VideoList;
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { fetchVideosByUserId } from '../utils/api';
 import VideoForm from './VideoForm';
 
-const VideoCard = ({ video, onVideoSelect }) => {
+
+// Working
+// const VideoCard = ({ video, onVideoSelect }) => {
+//   console.log("Here");
+//   const videoRef = useRef(null);
+
+//   const handleMouseEnter = () => {
+//     if (videoRef.current) {
+//       videoRef.current.play();
+//     }
+//   };
+
+//   const handleMouseLeave = () => {
+//     if (videoRef.current) {
+//       videoRef.current.pause();
+//       videoRef.current.currentTime = 0;
+//     }
+//   };
+
+//   const handleClick = () => {
+//     onVideoSelect(video);
+//   };
+
+//   return (
+//     <div className="w-full md:w-0.95 p-5 cursor-pointer" onClick={handleClick}>
+//       <div className="relative">
+//         <div className="wrap-video">
+//           <video
+//             ref={videoRef}
+//             className="object-cover h-96 w-full"
+//             loop
+//             muted
+//             MouseEnter={handleMouseEnter}
+//             MouseLeave={handleMouseLeave}
+//           >
+//             <source src={video.video_url} type="video/mp4" />
+//           </video>
+//           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
+//             {/* Play button or any other overlay elements */}
+//             <svg
+//               className="w-12 h-12 text-white cursor-pointer"
+//               xmlns="http://www.w3.org/2000/svg"
+//               viewBox="0 0 24 24"
+//               fill="currentColor"
+//               onClick={handleClick}
+//             >
+//               <path d="M17.5 12L10 18V6l7.5 6zm-12 6h-3v-12h3v12zm14-12h-3v12h3v-12z" />
+//             </svg>
+//           </div>
+//         </div>
+//         <div className="mt-4 grid grid-cols-6 gap-4">
+//           <div className="col-start-1 col-end-3 font-bold text-lg text-white uppercase font-mono">{video.title}</div>
+//           <div className="col-end-7 col-span-2 text-sm text-gray-500 uppercase flex justify-end">{video.num_comments} Comments</div>
+//         </div>
+//         <div className="mt-1 text-gray-400 text-xs uppercase font-mono">{video.description}</div>
+//       </div>
+//     </div>
+//   );
+// };
+
+
+const VideoCard = ({ video }) => {
+  const videoRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  const handleClick = () => {
+    // Implement your click functionality if needed
+  };
+
   return (
-    <div className="w-full md:w-1/2 p-5" onClick={() => onVideoSelect(video)}>
-      <div className="relative">
-        <div className="wrap-video">
-          <video className="object-cover h-96 w-full" loop>
-            <source src={video.video_url} type="video/mp4" />
-          </video>
+    <div
+      className="w-full md:w-0.95 p-5"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
+    >
+      <div className="wrap-video relative">
+        <video
+          ref={videoRef}
+          className="object-cover h-96 w-full bg-black"
+          loop
+          muted
+        >
+          <source src={video.video_url} type="video/mp4" />
+        </video>
+        {isHovered && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
-            <svg className="w-12 h-12 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            {/* Play button or any other overlay elements */}
+            <svg
+              className="w-12 h-12 text-white cursor-pointer"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              onClick={handleClick}
+            >
               <path d="M17.5 12L10 18V6l7.5 6zm-12 6h-3v-12h3v12zm14-12h-3v12h3v-12z" />
             </svg>
           </div>
-        </div>
-        <div className="mt-4 grid grid-cols-6 gap-4">
-          <div className="col-start-1 col-end-3 font-bold text-lg text-white uppercase font-mono">{video.title}</div>
-          <div className="col-end-7 col-span-2 text-sm text-gray-500 uppercase flex justify-end">{video.num_comments} Comments</div>
-        </div>
-        <div className="mt-1 text-gray-400 text-xs uppercase font-mono">{video.description}</div>
+        )}
       </div>
+      <div className="pt-4 grid grid-cols-6 gap-4">
+        <span className="col-start-1 col-end-3 font-bold text-lg text-white uppercase font-mono">
+          {video.title}
+        </span>
+        <span className="col-end-7 col-span-2 text-sm text-slate-500 uppercase font-mono flex justify-end">
+          <span className="">{video.category}</span>
+        </span>
+      </div>
+      <span className="block text-slate-400 text-xs uppercase font-mono">
+        {video.description}
+      </span>
     </div>
   );
 };
+
+
 
 const VideoList = ({ userId, onVideoSelect }) => {
   const [videos, setVideos] = useState([]);

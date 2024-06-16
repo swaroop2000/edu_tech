@@ -200,7 +200,7 @@ function App() {
 					  </div>
 
 					  {/* <div className="w-3/4 p-4"> */}
-						  {selectedVideo ? (
+						  {/* {selectedVideo ? (
 							  <>
 								  <VideoPlayer video={selectedVideo} />
 								  <CommentForm videoId={selectedVideo.id} userId={userId} />
@@ -210,7 +210,7 @@ function App() {
 						  : (
 							  <p className="text-center text-white"></p>
 						  )
-						  }
+						  } */}
 					  {/* </div> */}
 					  
 				  </div>
