@@ -64,17 +64,20 @@ export const updateVideo = async (videoId, videoData) => {
 };
 
 // Function to create a new comment for a video
-export const createComment = async (videoId, commentData) => {
+export const createComment = async (videoId, userId, commentData) => {
   try {
+    
     const response = await fetch(`${API_BASE_URL}/videos/comments`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
+      
       body: JSON.stringify({
         video_id: videoId,
-        ...commentData
+        user_id: userId,
+        content: commentData.content
       }),
     });
     if (!response.ok) {

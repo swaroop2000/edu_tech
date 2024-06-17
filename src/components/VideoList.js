@@ -164,7 +164,7 @@ const VideoList = ({ userId, onVideoSelect }) => {
       {isModalOpen && (
         <VideoForm userId={userId} onCloseModal={closeModal} onVideoCreated={handleVideoCreated} />
       )}
-       {selectedVideo && <VideoPlayer video={selectedVideo} onClose={() => setSelectedVideo(null)} />}
+       {selectedVideo && <VideoPlayer video={selectedVideo} userId={userId} onClose={() => setSelectedVideo(null)} />}
     </div>
   );
 };

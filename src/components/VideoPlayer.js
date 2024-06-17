@@ -219,7 +219,7 @@ import React from 'react';
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 
-const VideoPlayer = ({ video, onClose }) => {
+const VideoPlayer = ({ video, userId, onClose }) => {
   return (
     <div className="fixed top-0 left-0 w-3/4 h-full bg-black bg-opacity-90 flex items-left justify-left z-50 overflow-auto">
       
@@ -249,7 +249,7 @@ const VideoPlayer = ({ video, onClose }) => {
          
         </div>
         <div className="mt-4 flex-1 overflow-auto">
-        <CommentForm videoId={video.id} />
+        <CommentForm userId = {userId} videoId={video.id} />
           </div>
         
       

@@ -67,7 +67,9 @@ const CommentList = ({ videoId }) => {
 
   return (
     <div className="px-10 py-16 mx-auto bg-gray-100 bg-white min-w-[640px] max-w-screen-sm">
-      <h3 className="text-2xl font-bold text-left text-gray-800 sm:text-center">All comments on this post</h3>
+      <h3 className="text-2xl font-bold text-left text-gray-800 sm:text-center">
+      {comments.length > 0 ? 'All comments on this video' : 'No comments on this video'}
+      </h3>
       <div className="mt-10">
         {comments.map((comment) => (
           <div
