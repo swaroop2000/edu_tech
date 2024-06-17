@@ -152,7 +152,7 @@ function App() {
 
 							  {/* <a href="#" className="block bg-indigo-500 hover:bg-indigo-400 py-2 px-4 rounded-full text-sm font-mitr text-white uppercase mt-10">Get started</a> */}
 						  </div>
-						  <div className="lg:w-2/5 xl:w-1/2 flex flex-col items-end relative z-10">
+						  <div className="xl:w-2/5 xl:w-1/2 flex flex-col items-end relative z-10">
 							  <form onSubmit={handleUserSubmit}
 							   className="flex flex-col items-center bg-indigo-500 p-6 rounded-lg shadow-lg">
 								  <img src={logo} alt="Logo" className="w-24 h-24 mb-4" />
@@ -165,7 +165,7 @@ function App() {
 									  className="border border-gray-300 rounded px-2 py-1 mb-4"
 									  required />
 								  <button type="submit" className="bg-indigo-900 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
-									  Submit
+									  Log In
 								  </button>
 							  </form>
 						  </div>
@@ -174,7 +174,7 @@ function App() {
 						  
 						  
 					  </div>
-					  <img src={logo_b} alt="Logo" className="w-70 h-35 m1-15" />
+					  <img src={logo_b} alt="Logo" className="w-70 h-35 m1-30" />
 					
 				  </div>
 				  

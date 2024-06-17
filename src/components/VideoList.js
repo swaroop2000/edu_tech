@@ -31,6 +31,7 @@ const VideoCard = ({ video, onVideoSelect }) => {
     onVideoSelect(video);
     // Implement your click functionality if needed
   };
+  
 
   return (
     <div
@@ -118,6 +119,12 @@ const VideoList = ({ userId, onVideoSelect }) => {
     setSelectedVideo(video);
   };
 
+  const handleCloseVideoPlayer = () => {
+    setSelectedVideo(null);
+    // shouldFetchVideos.current = true;
+    fetchUserVideos(); // Trigger a re-fetch of the videos
+  };
+
   return (
     <div className="flex-grow px-4 overflow-auto">
       <div className="bg-indigo-900 py-4 px-4">
@@ -171,7 +178,7 @@ const VideoList = ({ userId, onVideoSelect }) => {
       {isModalOpen && (
         <VideoForm userId={userId} onCloseModal={closeModal} onVideoCreated={handleVideoCreated} />
       )}
-       {selectedVideo && <VideoPlayer video={selectedVideo} userId={userId} onClose={() => setSelectedVideo(null)} />}
+       {selectedVideo && <VideoPlayer video={selectedVideo} userId={userId} onClose={handleCloseVideoPlayer} />}
     </div>
   );
 };
