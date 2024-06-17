@@ -160,6 +160,7 @@ function App() {
 								  <input
 									  type="text"
 									  id="user_id"
+									  placeholder = "sswaroop_harip"
 									  value={userInput}
 									  onChange={(e) => setUserInput(e.target.value)}
 									  className="border border-gray-300 rounded px-2 py-1 mb-4"
@@ -174,7 +175,10 @@ function App() {
 						  
 						  
 					  </div>
-					  <img src={logo_b} alt="Logo" className="w-70 h-35 m1-30" />
+					  <div className="flex justify-left">
+  <img src={logo_b} alt="Logo" className="w-200 h-150 m-4" />
+</div>
+					  {/* <img src={logo_b} alt="Logo" className="w-70 h-35 m1-30" /> */}
 					
 				  </div>
 				  
@@ -198,7 +202,7 @@ function App() {
 
 					  
 				  </div>
-				  <img src={logo_b} alt="Logo" className="w-100 h-35 m1-25" />
+				  
 			  </>
 		  )
 		  }

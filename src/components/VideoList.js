@@ -6,6 +6,7 @@ import { fetchVideosByUserId } from '../utils/api';
 import VideoForm from './VideoForm';
 import VideoPlayer from './VideoPlayer';
 import logo from '../assets/LOGO_ICON.png';
+import logo_b from '../assets/FULL_LOGO_WHITE.png';
 
 
 
@@ -131,7 +132,7 @@ const VideoList = ({ userId, onVideoSelect }) => {
     <div className="flex-grow px-4 overflow-auto">
       <div className="bg-indigo-900 py-4 px-4">
       <div className="flex items-center justify-center mb-4">
-          <img src={logo} alt="Logo" className="w-24 h-24 mr-4" />
+          <img src={logo} alt="Logo" className="w-40 h-40 mr-4" />
           <h2 className="text-white text-5xl font-black uppercase">Edu Videos Dashboard</h2>
         </div>
 
@@ -186,6 +187,10 @@ const VideoList = ({ userId, onVideoSelect }) => {
         <VideoForm userId={userId} onCloseModal={closeModal} onVideoCreated={handleVideoCreated} />
       )}
        {selectedVideo && <VideoPlayer video={selectedVideo} userId={userId} onClose={handleCloseVideoPlayer} />}
+
+       <div className="flex justify-center">
+  <img src={logo_b} alt="Logo" className="w-200 h-150 m-4" />
+</div>
     </div>
   );
 };
