@@ -5,6 +5,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { fetchVideosByUserId } from '../utils/api';
 import VideoForm from './VideoForm';
 import VideoPlayer from './VideoPlayer';
+import logo from '../assets/LOGO_ICON.png';
 
 
 
@@ -126,9 +127,13 @@ const VideoList = ({ userId, onVideoSelect }) => {
   };
 
   return (
+    
     <div className="flex-grow px-4 overflow-auto">
       <div className="bg-indigo-900 py-4 px-4">
-        <h2 className="text-white text-5xl font-black uppercase text-center mb-4">Your Videos</h2>
+      <div className="flex items-center justify-center mb-4">
+          <img src={logo} alt="Logo" className="w-24 h-24 mr-4" />
+          <h2 className="text-white text-5xl font-black uppercase">Edu Videos Dashboard</h2>
+        </div>
 
         {successMessage && (
           <div className="alert alert-success text-center mb-4">
@@ -139,11 +144,13 @@ const VideoList = ({ userId, onVideoSelect }) => {
         <div className="mt-12">
           <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
             <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
+              
               <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="w-6 h-6 text-white">
                   <path fillRule="evenodd" d="M10.5 17.5l7-5.5-7-5.5v11z" />
                 </svg>
               </div>
+              
               <div className="p-4 text-right">
                 <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Videos</p>
                 <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{videos.length}</h4>

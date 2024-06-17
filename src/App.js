@@ -71,10 +71,10 @@
 
 import { useState } from 'react';
 import VideoList from './components/VideoList';
-import VideoPlayer from './components/VideoPlayer';
-import VideoForm from './components/VideoForm';
-import CommentList from './components/CommentList';
-import CommentForm from './components/CommentForm';
+// import VideoPlayer from './components/VideoPlayer';
+// import VideoForm from './components/VideoForm';
+// import CommentList from './components/CommentList';
+// import CommentForm from './components/CommentForm';
 import logo from './assets/LOGO_ICON.png';  // Update this path to your actual logo image
 import logo_b from './assets/FULL_LOGO_WHITE.png';
 
@@ -189,29 +189,13 @@ function App() {
 			 
 		  ) : (
 			  <>
-				  {/* <div className="h-1/10 flex justify-center items-center">
-					  <VideoForm userId={userId} />
-				  </div> */}
-				  <img src={logo} alt="Logo" className="w-100 h-50 mb-4" />
+				  {/* <img src={logo} alt="Logo" className="w-100 h-50 mb-4" /> */}
 
 				  <div className="flex mt-6">
 					  <div className="w-100 p-4">
 						  <VideoList userId={userId} onVideoSelect={handleVideoSelect} />
 					  </div>
 
-					  {/* <div className="w-3/4 p-4"> */}
-						  {/* {selectedVideo ? (
-							  <>
-								  <VideoPlayer video={selectedVideo} />
-								  <CommentForm videoId={selectedVideo.id} userId={userId} />
-								  <CommentList videoId={selectedVideo.id} />
-							  </>
-						  ) 
-						  : (
-							  <p className="text-center text-white"></p>
-						  )
-						  } */}
-					  {/* </div> */}
 					  
 				  </div>
 				  <img src={logo_b} alt="Logo" className="w-100 h-35 m1-25" />
