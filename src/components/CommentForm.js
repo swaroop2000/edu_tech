@@ -17,9 +17,7 @@ const CommentForm = ({ videoId, userId, onSubmit }) => {
       onSubmit(); 
       window.alert('Comment posted successfully!');
     } catch (error) {
-      setError('Failed to post comment. Please try again.');
-      console.error('Error posting comment:', error);
-      window.alert('Failed to post comment. Please try again.');
+      window.alert('Error posting comment:', error);
     }
   };
 

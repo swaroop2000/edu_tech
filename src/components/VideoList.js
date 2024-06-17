@@ -1,6 +1,4 @@
 
-
-
 import React, { useRef, useState, useEffect } from 'react';
 import { fetchVideosByUserId } from '../utils/api';
 import VideoForm from './VideoForm';
@@ -14,23 +12,6 @@ const VideoCard = ({ video, onVideoSelect }) => {
   const videoRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-
-  // const handleMouseEnter = () => {
-  //   setIsHovered(true);
-  //   if (videoRef.current) {
-  //     videoRef.current.play();
-  //     setIsPlaying(true);
-  //   }
-  // };
-
-  // const handleMouseLeave = () => {
-  //   setIsHovered(false);
-  //   if (videoRef.current  && isPlaying) {
-  //     videoRef.current.pause();
-  //     videoRef.current.currentTime = 0;
-  //     setIsPlaying(false);
-  //   }
-  // };
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -65,7 +46,6 @@ const VideoCard = ({ video, onVideoSelect }) => {
 
   const handleClick = () => {
     onVideoSelect(video);
-    // Implement your click functionality if needed
   };
   
 
@@ -87,7 +67,6 @@ const VideoCard = ({ video, onVideoSelect }) => {
         </video>
         {isHovered && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
-            {/* Play button or any other overlay elements */}
             <svg
               className="w-12 h-12 text-white cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
@@ -157,8 +136,7 @@ const VideoList = ({ userId, onVideoSelect }) => {
 
   const handleCloseVideoPlayer = () => {
     setSelectedVideo(null);
-    // shouldFetchVideos.current = true;
-    fetchUserVideos(); // Trigger a re-fetch of the videos
+    fetchUserVideos(); 
   };
 
   return (
@@ -213,9 +191,6 @@ const VideoList = ({ userId, onVideoSelect }) => {
             <VideoCard key={video.id} video={video} onVideoSelect={handleVideoSelect} />
           ))
         )}
-        {/* {videos.map((video) => (
-          <VideoCard key={video.id} video={video} onVideoSelect={handleVideoSelect} />
-        ))} */}
       </div>
 
       {isModalOpen && (
