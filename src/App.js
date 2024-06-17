@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import Joyride from 'react-joyride';
 import VideoList from './components/VideoList';
 import logo from './assets/LOGO_ICON.png';
 import logo_b from './assets/FULL_LOGO_WHITE.png';
@@ -8,6 +9,7 @@ function App() {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [userId, setUserId] = useState('');
   const [userInput, setUserInput] = useState('');
+  const [run, setRun] = useState(true);
 
   const handleVideoSelect = (video) => {
     setSelectedVideo(video);
@@ -18,8 +20,31 @@ function App() {
     setUserId(userInput);
   };
 
+  const steps = [
+    {
+      target: '#login-form',
+      content:( <div>
+	  Login here
+	  <br />
+	  Kindly use sswaroop_hpodhili
+	</div>)
+    },
+  ];
+
   return (
 <><link href="https://fonts.googleapis.com/css?family=Mitr|Roboto+Slab|Source+Sans+Pro&display=swap" rel="stylesheet" /><script src="https://premium-tailwindcomponents.netlify.app/assets/build/js/main.js?id=8c11b7cf78ebea1b5aed"></script><div className="flex flex-col justify-center items-center min-h-screen bg-indigo-900">
+<Joyride
+          steps={steps}
+          run={run}
+          continuous
+          showProgress
+          showSkipButton
+          styles={{
+            options: {
+              zIndex: 10000,
+            },
+          }}
+        />
 		  {!userId ? (
 			  <>
 				  <div className="bg-indigo-900 items-center h-screen bg-indigo-900">
@@ -57,7 +82,7 @@ function App() {
 							  <h1 className="font-roboto-slab text-4xl sm:text-6xl text-red-400 leading-tight mt-4">Let's go <br /> back to school</h1>
 
 						  </div>
-						  <div className="xl:w-2/5 xl:w-1/2 flex flex-col items-end relative z-10">
+						  <div id="login-form" className="xl:w-2/5 xl:w-1/2 flex flex-col items-end relative z-10">
 							  <form onSubmit={handleUserSubmit}
 							   className="flex flex-col items-center bg-indigo-500 p-6 rounded-lg shadow-lg">
 								  <img src={logo} alt="Logo" className="w-24 h-24 mb-4" />
