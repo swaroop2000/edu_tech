@@ -111,10 +111,7 @@ const VideoList = ({ userId, onVideoSelect }) => {
 
   const handleVideoCreated = (createdVideo) => {
     fetchUserVideos();
-    setSuccessMessage('Video uploaded successfully');
-    setTimeout(() => {
-      setSuccessMessage('');
-    }, 3000);
+    alert('Video uploaded successfully!');
     closeModal();
   };
   const handleVideoSelect = (video) => {
@@ -156,9 +153,19 @@ const VideoList = ({ userId, onVideoSelect }) => {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {videos.map((video) => (
+      {videos.length === 0 ? (
+          <h3 className="text-white text-3xl font-black uppercase text-center mb-4">
+            You have not added any videos yet.<br />
+            Use the above button to add the video.
+          </h3>
+        ) : (
+          videos.map((video) => (
+            <VideoCard key={video.id} video={video} onVideoSelect={handleVideoSelect} />
+          ))
+        )}
+        {/* {videos.map((video) => (
           <VideoCard key={video.id} video={video} onVideoSelect={handleVideoSelect} />
-        ))}
+        ))} */}
       </div>
 
       {isModalOpen && (

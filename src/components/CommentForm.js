@@ -129,7 +129,7 @@ const CommentForm = ({ videoId, userId, onSubmit }) => {
             onChange={(e) => setContent(e.target.value)}
             className="w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none"
             placeholder="Write your comment"
-            rows="5"
+            rows="4"
             required
           />
           <input
