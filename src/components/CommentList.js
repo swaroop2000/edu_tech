@@ -77,7 +77,7 @@ const CommentList = ({ videoId }) => {
             className="flex items-center w-full px-6 py-6 mx-auto mt-10 bg-white border border-gray-200 rounded-lg sm:px-8 md:px-12 sm:py-8 sm:shadow w-full"
           >
             <div>
-              <h3 className="text-lg font-bold text-purple-500 sm:text-xl md:text-2xl">By {comment.user_id}</h3>
+              <h3 className="text-lg font-bold text-indigo-500 sm:text-xl md:text-2xl">By {comment.user_id}</h3>
               <p className="text-sm font-bold text-gray-300">{new Date(comment.created_at).toLocaleString()}</p>
               <p className="mt-2 text-base text-gray-600 sm:text-lg md:text-normal">
                 {comment.content}

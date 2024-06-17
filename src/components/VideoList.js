@@ -13,21 +13,55 @@ import logo_b from '../assets/FULL_LOGO_WHITE.png';
 const VideoCard = ({ video, onVideoSelect }) => {
   const videoRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // const handleMouseEnter = () => {
+  //   setIsHovered(true);
+  //   if (videoRef.current) {
+  //     videoRef.current.play();
+  //     setIsPlaying(true);
+  //   }
+  // };
+
+  // const handleMouseLeave = () => {
+  //   setIsHovered(false);
+  //   if (videoRef.current  && isPlaying) {
+  //     videoRef.current.pause();
+  //     videoRef.current.currentTime = 0;
+  //     setIsPlaying(false);
+  //   }
+  // };
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-    if (videoRef.current) {
-      videoRef.current.play();
+    try {
+      if (videoRef.current) {
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.error('Error playing video:', error);
+          });
+        }
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.error('Error playing video:', error);
     }
   };
-
+  
   const handleMouseLeave = () => {
     setIsHovered(false);
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
+    try {
+      if (videoRef.current && isPlaying) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0;
+        setIsPlaying(false);
+      }
+    } catch (error) {
+      console.error('Error pausing video:', error);
     }
   };
+  
 
   const handleClick = () => {
     onVideoSelect(video);
