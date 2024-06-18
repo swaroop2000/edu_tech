@@ -15,7 +15,7 @@ To run the Video Platform Application locally, follow these steps:
 
 ## 2. run below commands
 
-## cd edu
+## cd [root folder]
 ## npm install
 ## npm run
 
