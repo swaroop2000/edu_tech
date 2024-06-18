@@ -26,3 +26,7 @@ Open your web browser and navigate to http://localhost:3000 to view the applicat
 ## Platform screen shots
 
 ![alt text](./screenshots/Screenshot%20(616).png)
+
+![alt text](./screenshots/Screenshot%20(617).png)
+
+![alt text](./screenshots/Screenshot%20(619).png)
