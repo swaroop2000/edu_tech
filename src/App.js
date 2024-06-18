@@ -1,25 +1,25 @@
-
 import { useState } from 'react';
-import Joyride from 'react-joyride';
-import VideoList from './components/VideoList';
-import logo from './assets/LOGO_ICON.png';
-import logo_b from './assets/FULL_LOGO_WHITE.png';
+import Joyride from 'react-joyride'; // Importing Joyride for onboarding tour
+import VideoList from './components/VideoList'; // Importing VideoList component
+import logo from './assets/LOGO_ICON.png'; // Importing logo image
+import logo_b from './assets/FULL_LOGO_WHITE.png'; // Importing another logo image
 
 function App() {
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [userId, setUserId] = useState('');
-  const [userInput, setUserInput] = useState('');
-  const [run, setRun] = useState(true);
+  const [selectedVideo, setSelectedVideo] = useState(null); // State to track selected video
+  const [userId, setUserId] = useState(''); // State to store user ID
+  const [userInput, setUserInput] = useState(''); // State to store user input for ID
+  const [run, setRun] = useState(true); // State to control Joyride tour
 
+  // Handler for selecting a video
   const handleVideoSelect = (video) => {
     setSelectedVideo(video);
   };
-
+ // Handler for submitting user ID form
   const handleUserSubmit = (e) => {
     e.preventDefault();
     setUserId(userInput);
   };
-
+ // Joyride steps for onboarding tour
   const steps = [
     {
       target: '#login-form',
@@ -74,7 +74,7 @@ function App() {
 						  </nav>
 					  </header>
 					  
-
+{/* Main content section */}
 					  <div className="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-24 xl:py-40">
 						  <div className="lg:w-3/5 xl:w-2/5 flex flex-col items-start relative z-10">
 							  
@@ -82,6 +82,7 @@ function App() {
 							  <h1 className="font-roboto-slab text-4xl sm:text-6xl text-red-400 leading-tight mt-4">Let's go <br /> back to school</h1>
 
 						  </div>
+ {/* Login form section */}
 						  <div id="login-form" className="xl:w-2/5 xl:w-1/2 flex flex-col items-end relative z-10">
 							  <form onSubmit={handleUserSubmit}
 							   className="flex flex-col items-center bg-indigo-500 p-6 rounded-lg shadow-lg">
@@ -95,6 +96,7 @@ function App() {
 									  onChange={(e) => setUserInput(e.target.value)}
 									  className="border border-gray-300 rounded px-2 py-1 mb-4"
 									  required />
+{/* Submit button */}
 								  <button type="submit" className="bg-indigo-900 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
 									  Log In
 								  </button>
@@ -105,6 +107,7 @@ function App() {
 						  
 						  
 					  </div>
+{/* Additional content */}
 					  <div className="flex justify-left">
   <img src={logo_b} alt="Logo" className="w-200 h-150 m-4" />
 </div>
@@ -119,8 +122,9 @@ function App() {
 			 
 		  ) : (
 			  <>
-
+{/* Conditional rendering after user login */}
 				  <div className="flex mt-6">
+{/* VideoList component rendering */}
 					  <div className="w-100 p-4">
 						  <VideoList userId={userId} onVideoSelect={handleVideoSelect} />
 					  </div>

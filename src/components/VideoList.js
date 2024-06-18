@@ -9,11 +9,13 @@ import logo_b from '../assets/FULL_LOGO_WHITE.png';
 
 
 
+// Component for individual video card in the list
 const VideoCard = ({ video, onVideoSelect }) => {
   const videoRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
+// Function to handle mouse enter event on video card
   const handleMouseEnter = () => {
     setIsHovered(true);
     try {
@@ -30,7 +32,8 @@ const VideoCard = ({ video, onVideoSelect }) => {
       console.error('Error playing video:', error);
     }
   };
-  
+ 
+// Function to handle mouse leave event on video card  
   const handleMouseLeave = () => {
     setIsHovered(false);
     try {
@@ -44,7 +47,7 @@ const VideoCard = ({ video, onVideoSelect }) => {
     }
   };
   
-
+// Function to handle click event on video card
   const handleClick = () => {
     onVideoSelect(video);
   };
@@ -57,6 +60,8 @@ const VideoCard = ({ video, onVideoSelect }) => {
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
     >
+
+{/* Video element to display the video */}
       <div className="wrap-video relative">
         <video
           ref={videoRef}
@@ -66,8 +71,11 @@ const VideoCard = ({ video, onVideoSelect }) => {
         >
           <source src={video.video_url} type="video/mp4" />
         </video>
+
+{/* Overlay for hover effect */}
         {isHovered && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
+{/* Play icon */}
             <svg
               className="w-12 h-12 text-white cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
@@ -80,22 +88,26 @@ const VideoCard = ({ video, onVideoSelect }) => {
           </div>
         )}
       </div>
+{/* Video details */}
       <div className="pt-4 grid grid-cols-6 gap-4">
         <span className="col-start-1 col-end-3 font-bold text-lg text-white uppercase font-mono">
+{/* Title */}
           {video.title}
         </span>
         <span className="col-end-7 col-span-2 text-sm text-slate-500 uppercase font-mono flex justify-end">
+{/* Number of comments */}
         <div className="col-end-7 col-span-2 text-sm text-black-900 uppercase flex justify-end">{video.num_comments} Comments</div>
         </span>
       </div>
       <span className="block text-slate-400 text-xs uppercase font-mono">
+{/* Description */}
         {video.description}
       </span>
     </div>
   );
 };
 
-
+// Main VideoList component
 
 const VideoList = ({ userId, onVideoSelect }) => {
   const [videos, setVideos] = useState([]);
@@ -104,6 +116,7 @@ const VideoList = ({ userId, onVideoSelect }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [run, setRun] = useState(true);
 
+ // Function to fetch videos by user ID from the API
   const fetchUserVideos = async () => {
     try {
       const videosData = await fetchVideosByUserId(userId);
@@ -119,34 +132,42 @@ const VideoList = ({ userId, onVideoSelect }) => {
     }
   }, [userId]);
 
+// Function to open the modal for adding a new video  
   const openModal = () => {
     setIsModalOpen(true);
   };
 
+// Function to close the modal for adding a new video
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
+// Callback function after a video is successfully created  
   const handleVideoCreated = (createdVideo) => {
     fetchUserVideos();
     alert('Video uploaded successfully!');
     closeModal();
   };
+
+// Function to handle video selection  
   const handleVideoSelect = (video) => {
     handleJoyrideStop();
     setSelectedVideo(video);
   };
 
+  // Function to close the video player modal  
   const handleCloseVideoPlayer = () => {
     setSelectedVideo(null);
+  // Refresh the video list after closing the video player
     fetchUserVideos(); 
   };
 
+// Function to stop Joyride tour  
   const handleJoyrideStop = () => {
     setRun(false);
   };
 
-
+// Steps for Joyride tour
   const steps = [
     {
       target: '#count',
@@ -169,13 +190,15 @@ const VideoList = ({ userId, onVideoSelect }) => {
   return (
     
     <div className="flex-grow px-4 overflow-auto">
-       
+{/* Header section */}       
       <div className="bg-indigo-900 py-4 px-4">
       <div className="flex items-center justify-center mb-4">
       
           <img src={logo} alt="Logo" className="w-40 h-40 mr-4" />
           <h2 className="text-white text-5xl font-black uppercase">Edu Videos Dashboard</h2>
         </div>
+
+{/* Joyride tour */}
         <Joyride
           steps={steps}
           run={run}
@@ -189,12 +212,14 @@ const VideoList = ({ userId, onVideoSelect }) => {
           }}
         />
 
+ {/* Success message */}
         {successMessage && (
           <div className="alert alert-success text-center mb-4">
             {successMessage}
           </div>
         )}
     
+ {/* Video statistics */}    
         <div className="mt-12">
        
           <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
@@ -214,6 +239,8 @@ const VideoList = ({ userId, onVideoSelect }) => {
                 <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{videos.length}</h4>
               </div>
             </div>
+
+{/* Button to add new video */}
             <button id = "add" className="group relative h-12 w-48 overflow-hidden rounded-2xl bg-indigo-500 text-lg font-bold text-white flex items-center justify-center" onClick={() => {
                 openModal();
                 handleJoyrideStop();
@@ -227,7 +254,11 @@ const VideoList = ({ userId, onVideoSelect }) => {
           </div>
         </div>
       </div>
+
+{/* Video list */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+{/* Conditional rendering based on whether there are videos */}
       {videos.length === 0 ? (
           <h3 className="text-white text-3xl font-black uppercase text-center mb-4">
             You have not added any videos yet.<br />
@@ -242,11 +273,15 @@ const VideoList = ({ userId, onVideoSelect }) => {
         )}
       </div>
 
+{/* Modal for adding a new video */}
       {isModalOpen && (
         <VideoForm userId={userId} onCloseModal={closeModal} onVideoCreated={handleVideoCreated} />
       )}
+
+{/* Video player modal */}      
        {selectedVideo && <VideoPlayer video={selectedVideo} userId={userId} onClose={handleCloseVideoPlayer} />}
 
+{/* Footer section with logo */}
        <div className="flex justify-center">
   <img src={logo_b} alt="Logo" className="w-200 h-150 m-4" />
 </div>

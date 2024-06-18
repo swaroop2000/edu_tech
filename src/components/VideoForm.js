@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { createVideo, updateVideo } from '../utils/api';
 
 const VideoForm = ({ userId, onCloseModal, onVideoCreated, initialVideo }) => {
+  // State variables
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
@@ -10,6 +11,7 @@ const VideoForm = ({ userId, onCloseModal, onVideoCreated, initialVideo }) => {
   const [videoPreviewUrl, setVideoPreviewUrl] = useState('');
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
+// Effect to set form fields when initialVideo changes
   useEffect(() => {
     if (initialVideo) {
       setTitle(initialVideo.title);
@@ -19,31 +21,37 @@ const VideoForm = ({ userId, onCloseModal, onVideoCreated, initialVideo }) => {
     }
   }, [initialVideo]);
 
+// Handle URL change to update video preview
   const handleUrlChange = (e) => {
     const videoUrl = e.target.value;
     setUrl(videoUrl);
     setVideoPreviewUrl(videoUrl);
   };
 
+// Handle video play
   const handleVideoPlay = () => {
     setIsVideoPlaying(true);
   };
 
+// Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
       if (initialVideo) {
+// Update existing video        
         const updatedVideo = { video_id: initialVideo.id, title, description };
         await updateVideo(updatedVideo.video_id, updatedVideo);
         onVideoCreated(updatedVideo); 
       } else {
+// Create new video        
         const newVideo = { title, description, video_url: url, user_id: userId };
         const createdVideo = await createVideo(newVideo);
         onVideoCreated(createdVideo);
       }
 
+// Reset form fields and close modal
       setTitle('');
       setDescription('');
       setUrl('');
@@ -60,8 +68,12 @@ const VideoForm = ({ userId, onCloseModal, onVideoCreated, initialVideo }) => {
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white p-8 max-w-md w-full rounded-lg shadow-lg">
         <h1 className="text-2xl font-bold mb-4 text-center">{initialVideo ? 'Edit Video' : 'Add New Video'}</h1>
+        
+ {/* Form */}        
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
+
+{/* Title input */}            
             <label htmlFor="title" className="block text-sm font-medium text-gray-700">
               Title
             </label>
@@ -75,6 +87,8 @@ const VideoForm = ({ userId, onCloseModal, onVideoCreated, initialVideo }) => {
               required
             />
           </div>
+
+{/* Description textarea */}          
           <div className="mb-4">
             <label htmlFor="description" className="block text-sm font-medium text-gray-700">
               Description
@@ -89,6 +103,8 @@ const VideoForm = ({ userId, onCloseModal, onVideoCreated, initialVideo }) => {
               required
             ></textarea>
           </div>
+
+{/* Video URL input */}          
           <div className="mb-4">
             <label htmlFor="url" className="block text-sm font-medium text-gray-700">
               Video URL
@@ -103,6 +119,8 @@ const VideoForm = ({ userId, onCloseModal, onVideoCreated, initialVideo }) => {
               placeholder="Enter video URL"
               required={!initialVideo}
             />
+
+{/* Video preview */}            
             {videoPreviewUrl && (
               <div className="mt-4">
                 <video
@@ -116,6 +134,8 @@ const VideoForm = ({ userId, onCloseModal, onVideoCreated, initialVideo }) => {
               </div>
             )}
           </div>
+
+{/* Buttons: Cancel and Submit */}          
           <div className="flex justify-end">
             <button
               type="button"
